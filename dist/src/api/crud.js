@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.update = exports.getAndCountAll = exports.getAll = exports.getOne = exports.post = void 0;
+exports.deleteData = exports.update = exports.getAndCountAll = exports.getAll = exports.getOne = exports.post = void 0;
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const post = (data, model) => __awaiter(void 0, void 0, void 0, function* () {
@@ -25,12 +25,16 @@ const getAll = (where, model) => __awaiter(void 0, void 0, void 0, function* () 
 });
 exports.getAll = getAll;
 const getAndCountAll = (where, model, options) => __awaiter(void 0, void 0, void 0, function* () {
-    const { skip, first } = options;
+    const { skip, take } = options || {};
     return yield prisma[model].findMany(Object.assign(Object.assign({}, where), { skip,
-        first }));
+        take }));
 });
 exports.getAndCountAll = getAndCountAll;
 const update = (data, where, model) => __awaiter(void 0, void 0, void 0, function* () {
     return yield prisma[model].update(Object.assign(Object.assign({}, where), { data }));
 });
 exports.update = update;
+const deleteData = (where, model) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield prisma[model].delete(Object.assign({}, where));
+});
+exports.deleteData = deleteData;

@@ -19,14 +19,18 @@ export const getAll = async (where: any, model: any) => {
 };
 
 export const getAndCountAll = async (where: any, model: any, options: any) => {
-  const { skip, first } = options;
+  const { skip, take } = options || {};
   return await prisma[model].findMany({
     ...where,
     skip,
-    first,
+    take,
   });
 };
 
 export const update = async (data: any, where: any, model: any) => {
   return await prisma[model].update({ ...where, data });
+};
+
+export const deleteData = async (where: any, model: any) => {
+  return await prisma[model].delete({ ...where });
 };

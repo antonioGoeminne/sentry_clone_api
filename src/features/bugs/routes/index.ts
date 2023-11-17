@@ -1,14 +1,14 @@
-import { createProject, createBug } from "../controllers";
-import { Request, Response } from "express";
+import { createProject, createBug, updateBug } from "../controllers";
+import { deleteBug } from "../controllers/delete-bug";
+import { getByProject } from "../controllers/get-bug";
 
 const express = require("express");
 const router = express.Router();
 
 const BASE = "/bugs";
 
-router.get(BASE + "/:project_id", (req: Request, res: Response) =>
-  res.status(200).json("hola mundo")
-);
+// GET BY PROJECT
+router.get(BASE + "/:project_id", getByProject);
 
 // CREATE PROJECT
 router.post(BASE + "/project", createProject);
@@ -16,7 +16,10 @@ router.post(BASE + "/project", createProject);
 // CREATE BUG
 router.post(BASE, createBug);
 
-// router.patch(BASE + "/:id", (req, res) => res.status(200).json("hola mundo"));
+// UPDATE BUG
+router.put(BASE + "/:id", updateBug);
 
-// router.delete(BASE + "/:id", (req, res) => res.status(200).json("hola mundo"));
+// DELETE BUG
+router.delete(BASE + "/:id", deleteBug);
+
 module.exports = router;
