@@ -9,20 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getByProject = void 0;
+exports.getAllProjects = void 0;
 const crud_1 = require("../../../api/crud");
 const { asyncHandler } = require("../../../helpers/asyncHandler");
-exports.getByProject = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { project_id, skip = 0, take = 10 } = req.params;
-    const bugs = yield (0, crud_1.getAndCountAll)({
-        where: Object.assign({}, (project_id === "allProjects"
-            ? {}
-            : {
-                project_id: Number(project_id),
-            })),
-    }, "bug", {
-        skip,
-        take,
-    });
-    res.status(200).json(bugs);
+exports.getAllProjects = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const newProject = yield (0, crud_1.getAll)({ where: {} }, "project");
+    res.status(200).json(newProject);
 }));

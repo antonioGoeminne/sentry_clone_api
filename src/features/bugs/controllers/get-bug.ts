@@ -9,7 +9,11 @@ export const getByProject = asyncHandler(
     const bugs = await getAndCountAll(
       {
         where: {
-          project_id: Number(project_id),
+          ...(project_id === "allProjects"
+            ? {}
+            : {
+                project_id: Number(project_id),
+              }),
         },
       },
       "bug",
@@ -18,7 +22,6 @@ export const getByProject = asyncHandler(
         take,
       }
     );
-
     res.status(200).json(bugs);
   }
 );
