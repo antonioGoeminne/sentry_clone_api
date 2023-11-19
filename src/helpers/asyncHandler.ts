@@ -8,6 +8,7 @@ const asyncHandler: AsyncHandler = (asyncFn) => async (req, res, next) => {
   try {
     await asyncFn(req, res, next);
   } catch (error) {
+    console.log("error", error);
     next(error);
   }
 };

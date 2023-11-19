@@ -14,6 +14,7 @@ const asyncHandler = (asyncFn) => (req, res, next) => __awaiter(void 0, void 0, 
         yield asyncFn(req, res, next);
     }
     catch (error) {
+        console.log("error", error);
         next(error);
     }
 });

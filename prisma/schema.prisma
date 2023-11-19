@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -32,10 +33,9 @@ model Bug {
 }
 
 model Project {
-  id         Int       @id @default(autoincrement())
-  name       String
-  created_at DateTime
-  updated_at DateTime?
+  id          Int       @id @default(autoincrement())
+  name        String
+  created_at  DateTime
+  updated_at  DateTime?
   description String?
 }
-

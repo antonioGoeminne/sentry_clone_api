@@ -9,8 +9,8 @@ export const createBug = asyncHandler(async (req: Request, res: Response) => {
   const payload: Bug = {
     name,
     status,
-    project_id,
-    date: new Date(date),
+    project_id: Number(project_id),
+    date: date ? new Date(date) : undefined,
     created_at: new Date(),
   };
 

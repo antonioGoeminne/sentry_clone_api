@@ -9,18 +9,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createBug = void 0;
+exports.getByText = void 0;
 const crud_1 = require("../../../api/crud");
 const { asyncHandler } = require("../../../helpers/asyncHandler");
-exports.createBug = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, status, project_id, date } = req.body;
-    const payload = {
-        name,
-        status,
-        project_id: Number(project_id),
-        date: date ? new Date(date) : undefined,
-        created_at: new Date(),
-    };
-    const newBug = yield (0, crud_1.post)(Object.assign({}, payload), "bug");
-    res.status(200).json(newBug);
+exports.getByText = asyncHandler((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { text = "" } = req.query;
+    const projects = yield (0, crud_1.getAll)({
+        where: {
+            name: {
+                search: text.replace(/\s/g, ""),
+            },
+        },
+    }, "project");
+    res.status(200).json(projects);
 }));
